@@ -8,22 +8,12 @@ namespace HorseRacingConsole
 {
     public class RaceEvent
     {
-
         // Auto Properties
         public string Name { get; set; }
         public string Location { get; set; }
         public int NumberOfRaces { get; set; }
         public DateOnly Date { get; set; }
-
-        //// Fields
-        //private string _name;
-        //private string _location;
-        //private int _numberOfRaces;
-
-        //// Properties
-        //public string Name { get => _name; set => _name = value; }
-        //public string Location { get => _location; set => _location = value; }
-        //public int NumberOfRaces { get => _numberOfRaces; set => _numberOfRaces = value; }
+        public List<Race> Races { get; set; }
 
         // Constructors
         public RaceEvent()
@@ -32,6 +22,7 @@ namespace HorseRacingConsole
             Location = "";
             NumberOfRaces = 1;
             Date = DateOnly.FromDateTime(DateTime.Now); //Use this for testing
+            Races = new List<Race>();
         }
 
         public RaceEvent(string name, string location, int numberOfRaces, DateOnly date)
@@ -40,6 +31,14 @@ namespace HorseRacingConsole
             Location = location;
             NumberOfRaces = numberOfRaces;
             Date = date;
+            Races = new List<Race>();
+        }
+
+        // Methods
+
+        public void AddRaceToEvent(Race newRace)
+        {
+            Races.Add(newRace);
         }
 
         // Override methods

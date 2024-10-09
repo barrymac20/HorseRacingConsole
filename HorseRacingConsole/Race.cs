@@ -10,27 +10,27 @@ namespace HorseRacingConsole
     public class Race
     {
         // Fields
-        private TimeOnly _startTime;
-        private int _raceID;
         private string _raceName;
-        private List<Horse> _horses = new List<Horse>();
+        private TimeOnly _startTime;
+        private List<Horse> _horses;
 
         // Properties
-        public TimeOnly StartTime { get => _startTime; set => _startTime = value; }
-        public int RaceID { get => _raceID; set => _raceID = value; }
         public string RaceName { get => _raceName; set => _raceName = value; }
+        public TimeOnly StartTime { get => _startTime; set => _startTime = value; }
         public List<Horse> Horses { get => _horses; set => _horses = value; }
 
         // Constructors
         public Race() 
         {
+            RaceName = "Test";
             StartTime = new TimeOnly(2, 14, 30);
-            RaceID = 1;
+            Horses = new List<Horse>();
         }
-        public Race(TimeOnly startTime, int raceID)
+        public Race(string raceName, TimeOnly startTime)
         {
+            RaceName = raceName;
             StartTime = startTime;
-            RaceID = raceID;
+            Horses = new List<Horse>();
         }
 
         // Add horse to list
@@ -42,7 +42,7 @@ namespace HorseRacingConsole
         // Override methods
         public override string ToString()
         {
-            return $"\nRace Information:\nStart Time: {StartTime}\nRace ID: {RaceID}";
+            return $"\nRace Information:\nRace Name: {RaceName}\nStart Time: {StartTime}";
         }
     }
 }
