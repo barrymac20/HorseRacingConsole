@@ -15,6 +15,9 @@ namespace HorseRacingConsole
         // See list of race events
         // See list of races and horses when viewing event
 
-
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

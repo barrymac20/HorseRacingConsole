@@ -9,35 +9,49 @@ namespace HorseRacingConsole
 {
     public class Race
     {
-        // Fields
-        private string _raceName;
-        private TimeOnly _startTime;
-        private List<Horse> _horses;
+        // Static field for ID
+        private static int _nextRaceID = 1;
 
-        // Properties
-        public string RaceName { get => _raceName; set => _raceName = value; }
-        public TimeOnly StartTime { get => _startTime; set => _startTime = value; }
-        public List<Horse> Horses { get => _horses; set => _horses = value; }
+        // Auto Properties
+        public int RaceID { get; set; }
+        public string RaceName { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public List<Horse> Horses { get; set; }
+
+
 
         // Constructors
-        public Race() 
+        public Race()
         {
-            RaceName = "Test";
+            RaceID = _nextRaceID++; // = 1; - no need for this as using count of Races list to start ID
+            RaceName = "Gold Cup";
             StartTime = new TimeOnly(2, 14, 30);
             Horses = new List<Horse>();
         }
         public Race(string raceName, TimeOnly startTime)
         {
+            RaceID = _nextRaceID++; // 1; - no need for this as using count of Races list to start ID
             RaceName = raceName;
             StartTime = startTime;
             Horses = new List<Horse>();
         }
 
-        // Add horse to list
-        public void AddHorse(Horse horse)
+        // Methods
+
+        public static void ShowListOfRaces(List<Race> races)
         {
-            Horses.Add(horse);
+            foreach (Race race in races)
+            {
+                Console.WriteLine(race);
+            }
         }
+
+        //public void AddHorse(Horse horse)
+        //{
+        //    Horses.Add(horse);
+        //}
+
+        
 
         // Override methods
         public override string ToString()
