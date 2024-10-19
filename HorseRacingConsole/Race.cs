@@ -46,17 +46,32 @@ namespace HorseRacingConsole
             }
         }
 
-        //public void AddHorse(Horse horse)
-        //{
-        //    Horses.Add(horse);
-        //}
-
-        
+        public void AddHorseToRace(Horse horse)
+        {
+            Horses.Add(horse);
+        }
 
         // Override methods
         public override string ToString()
         {
-            return $"\nRace Information:\nRace Name: {RaceName}\nStart Time: {StartTime}";
+            string table = $"\nHorses in race {RaceName}:\n" +
+                            "---------------------------------------------------\n" +
+                            "| Horse ID | Horse Name           | Date of Birth |\n" +
+                            "---------------------------------------------------\n";
+            string noHorses = "There are currently no horses entered in this race!\n";
+            if (Horses.Count == 0)
+            {
+                table += noHorses;
+            }
+
+            foreach (var horse in Horses)
+            {
+                table += $"| {horse.HorseID,-8} | {horse.HorseName,-20} | {horse.DateOfBirth,-13} |\n";
+            }
+
+            table += "---------------------------------------------------";
+
+            return table;
         }
     }
 }

@@ -6,14 +6,20 @@ using System.Threading.Tasks;
 
 namespace HorseRacingConsole
 {
+    public enum RaceCourse
+    {
+        Cork, Downpatrick, Dundalk, Galway, Fairyhouse, Gowran, Kilbeggan, Killarney, Laytown, Leopardstown, Listowel, Naas, Navan, Punchestown, Roscommon, Sligo, Tramore, Ballinrobe, Limerick, Bellewstown, Thurles, Clonmel, Downroyal, Tipperary, Curragh, Wexford
+    }
+
     public class RaceEvent : IEvent
     {
-        // Static field for ID
+        // Fields
         private static int _nextEventID = 1;
+        //private RaceCourse _raceCourse;
 
         // Auto Properties
         public int EventID { get; set; }
-        public string Location { get; set; }
+        public RaceCourse RaceCourse { get; set; }
         public int NumberOfRaces { get; set; }
         public DateOnly Date { get; set; }
         public List<Race> Races { get; set; }
@@ -22,16 +28,16 @@ namespace HorseRacingConsole
         public RaceEvent()
         {
             EventID = _nextEventID++;
-            Location = "";
+            RaceCourse = RaceCourse.Curragh;
             NumberOfRaces = 0;
             Date = DateOnly.FromDateTime(DateTime.Now); //Use this for testing
             Races = new List<Race>();
         }
 
-        public RaceEvent(string location, DateOnly date)
+        public RaceEvent(RaceCourse raceCourse, DateOnly date)
         {
             EventID = _nextEventID++;
-            Location = location;
+            RaceCourse = raceCourse;
             NumberOfRaces = 0;
             Date = date;
             Races = new List<Race>();
@@ -47,11 +53,10 @@ namespace HorseRacingConsole
             }
         }
 
-        //public Race AddRaceToEvent(Race newRace)
-        //{
-        //    Races.Add(newRace);
-        //    return newRace;
-        //}
+        public void AddRaceToEvent(Race race)
+        {
+            Races.Add(race);
+        }
 
         // Override methods
         public override string ToString()
@@ -63,25 +68,22 @@ namespace HorseRacingConsole
             //$"| {Name,-15} | {Location,-15} | {NumberOfRaces,-15} | {Date,-15} |\n" +
             //$"---------------------------------------------------";
 
-            // Create the table header
-            string table = $"\nRaces in event {EventID}, {Location}:\n" +
-                        "---------------------------------------------------\n" +
-                        "| Race Number | Race Name            | Start Time |\n" +
-                        "---------------------------------------------------\n";
+            string table = $"\nRaces at the {RaceCourse} race meeting:\n" +
+                        "-----------------------------------------------\n" +
+                        "| Race ID | Race Name            | Start Time |\n" +
+                        "-----------------------------------------------\n";
             string noRaces = "There are currently no races created\n";
             if (Races.Count == 0)
             {
                 table += noRaces;
             }
-            // Loop through each Race and add it to the table
-            
+
             foreach (var race in Races)
             {
-                table += $"| {race.RaceID,-11} | {race.RaceName,-20} | {race.StartTime,-10} |\n";
+                table += $"| {race.RaceID,-7} | {race.RaceName,-20} | {race.StartTime,-10} |\n";
             }
 
-            // Add the closing line
-            table += "---------------------------------------------------";
+            table += "-----------------------------------------------";
 
             return table;
         }

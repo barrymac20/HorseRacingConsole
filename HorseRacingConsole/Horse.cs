@@ -13,7 +13,7 @@ namespace HorseRacingConsole
         // Static field
         private static int _nextHorseID = 1;
         // Auto properties
-        public string Name { get; set; }
+        public string HorseName { get; set; }
         public DateOnly DateOfBirth { get; set; }
         public int HorseID { get; set; }// = 1;
 
@@ -22,21 +22,21 @@ namespace HorseRacingConsole
         public Horse()
         {
             HorseID = _nextHorseID++;
-            Name = "name";
+            HorseName = "name";
             DateOfBirth = DateOnly.FromDateTime(DateTime.Now); //Use this for testing
         }
 
-        public Horse(string name, DateOnly dateOfBirth)
+        public Horse(string horseName, DateOnly dateOfBirth)
         {
             HorseID = _nextHorseID++;
-            Name = name;
+            HorseName = horseName;
             DateOfBirth = dateOfBirth;
         }
 
         // Override methods
         public override string ToString()
         {
-            return $"\nHorse Information:\nName: {Name}\nDate of Birth: {DateOfBirth}\nHorse ID: {HorseID}";
+            return $"\nHorse Information:\nName: {HorseName}\nDate of Birth: {DateOfBirth}\nHorse ID: {HorseID}";
         }
     }
 }
