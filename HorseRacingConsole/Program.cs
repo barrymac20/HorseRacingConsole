@@ -8,7 +8,8 @@ namespace HorseRacingConsole
     {
         private static void Main(string[] args)
         {
-
+            //CreateNewRace();
+            //GetRaceNameFromUser();
             RunHorseRacingApp();
         }
 
@@ -22,15 +23,15 @@ namespace HorseRacingConsole
 
             List<RaceEvent> raceEvents = new List<RaceEvent>();
             // For testing
-            RaceEvent raceEvent1 = new RaceEvent(RaceCourse.Cork, new DateOnly(2024, 10, 14));
-            RaceEvent raceEvent2 = new RaceEvent(RaceCourse.Dundalk, new DateOnly(2024, 11, 1));
+            RaceEvent raceEvent1 = new RaceEvent(Racecourse.Cork, new DateOnly(2024, 10, 14));
+            RaceEvent raceEvent2 = new RaceEvent(Racecourse.Dundalk, new DateOnly(2024, 11, 1));
             //racecourseManager.RaceEvents.Add(raceEvent1);
             //racecourseManager.RaceEvents.Add(raceEvent2);
             raceEvents.Add(raceEvent1);
             raceEvents.Add(raceEvent2);
 
-            Race race1 = new Race("Race1", new TimeOnly(2, 00, 00));
-            Race race2 = new Race("Race2", new TimeOnly(2, 00, 00));
+            Race race1 = new Race(Race.RaceNames[1], new TimeOnly(2, 00));
+            Race race2 = new Race(Race.RaceNames[2], new TimeOnly(2, 30));
             raceEvent1.Races.Add(race1);
             raceEvent2.Races.Add(race2);
 
@@ -74,14 +75,14 @@ namespace HorseRacingConsole
 
                 switch (managerOption)
                 {
-                    case 1:
+                    case 1: // Show all race events");
                         ShowRaceEvents(raceEvents); break;
-                    case 2:
+                    case 2: // Add new race event
                         AddRaceEvent(raceEvents, CreateNewRaceEvent());
                         ShowRaceEvents(raceEvents); break;
-                    case 3:
+                    case 3: // Show all races
                         ShowRaceEvents(raceEvents);
-                        Console.Write("Enter Event ID to see its races: ");
+                        Console.Write("Enter the relevant Event ID: ");
 
                         int userSelection3 = GetUserSelection();
                         foreach (var raceEvent in raceEvents)
@@ -93,9 +94,9 @@ namespace HorseRacingConsole
                             }
                         }
                         break;
-                    case 4:
+                    case 4: // Add race to a race event
                         ShowRaceEvents(raceEvents);
-                        Console.Write("Type Event ID to see its races: ");
+                        Console.Write("Enter the relevant Event ID: ");
 
                         int userSelection4 = GetUserSelection();
                         foreach (var raceEvent in raceEvents)
@@ -108,9 +109,9 @@ namespace HorseRacingConsole
                             }
                         }
                         break;
-                    case 5:
+                    case 5: // Add horses to a race
                         ShowRaceEvents(raceEvents);
-                        Console.Write("Type Event ID to see its races: ");
+                        Console.Write("Enter the relevant Event ID: ");
 
                         int userSelection5 = GetUserSelection();
                         foreach (var raceEvent in raceEvents)
@@ -132,7 +133,7 @@ namespace HorseRacingConsole
                             }
                         }
                         break;
-                    case 6:
+                    case 6: // Go back
                         return;
                     default: break;
                 }
@@ -293,15 +294,98 @@ namespace HorseRacingConsole
 
         public static RaceEvent CreateNewRaceEvent()
         {
-            RaceEvent raceEvent = new RaceEvent(RaceCourse.Naas, new DateOnly(2024, 11, 4)); // Replace this with user entry
+            Racecourse racecourse = GetRacecourseFromUser();
+            DateOnly eventDate = GetDateFromUser();
+
+            RaceEvent raceEvent = new RaceEvent(racecourse, eventDate);
             return raceEvent;
+        }
+
+        private static DateOnly GetDateFromUser()
+        {
+            Console.Write("\nPlease enter the date (yyyy-mm-dd): ");
+
+            string dateEntered = Console.ReadLine();
+
+            if (DateOnly.TryParse(dateEntered, out DateOnly eventDate))
+            {
+                return eventDate;
+            }
+            else
+            {
+                Console.WriteLine("Invalid date format, try again!");
+                return GetDateFromUser();
+            }
+        }
+
+        private static Racecourse GetRacecourseFromUser()
+        {
+            Console.WriteLine("Available race courses:\n");
+
+            for (int i = 1; i < Enum.GetValues(typeof(Racecourse)).Length + 1; i++)
+            {
+                Console.WriteLine($"{i}\t{(Racecourse)i}");
+            }
+
+            Console.Write("\nEnter the corresponding number: ");
+            Racecourse userInput = (Racecourse)int.Parse(Console.ReadLine());
+            return userInput;
+
+            //if (Enum.TryParse(userInput, out RaceCourse selectedCourse) && Enum.IsDefined(typeof(RaceCourse), selectedCourse))
+            //{
+            //    return selectedCourse;
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Invalid input. Try again.");
+            //    return GetRacecourseFromUser();
+            //}
         }
 
         public static Race CreateNewRace()
         {
-            Race race = new Race("Race1", new TimeOnly(2, 00, 00));
+            string raceName = GetRaceNameFromUser();
+            TimeOnly raceTime = GetTimeFromUser();
+
+            Race race = new Race(raceName, raceTime);
             return race;
         }
+        private static string GetRaceNameFromUser()
+        {
+            Console.WriteLine("Available race names:\n");
+
+            //for (int i = 1; i < Race.RaceNames.Count + 1; i++)
+            //{
+            //    Console.WriteLine($"{Race.RaceNames[i]}\t{(RaceName)i}");
+            //}
+
+            foreach (var raceName in Race.RaceNames) 
+            {
+                Console.WriteLine($"{raceName.Key}\t{raceName.Value}");
+            }
+
+            Console.Write("\nEnter the corresponding number: ");
+            int userInput = int.Parse(Console.ReadLine());
+            //Console.WriteLine(Race.RaceNames[userInput]);    
+            return Race.RaceNames[userInput];
+        }
+
+        private static TimeOnly GetTimeFromUser()
+        {
+            Console.Write("Please enter the time (HH:mm): ");
+            string timeInput = Console.ReadLine();
+
+            if (TimeOnly.TryParse(timeInput, out TimeOnly time))
+            {
+                return time;
+            }
+            else
+            {
+                Console.WriteLine("Invalid time format. Please try again.");
+                return GetTimeFromUser();
+            }
+        }
+
 
         public static Horse CreateNewHorse()
         {

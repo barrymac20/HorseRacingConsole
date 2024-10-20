@@ -7,13 +7,64 @@ using System.Xml.Linq;
 
 namespace HorseRacingConsole
 {
+    //public enum RaceName
+    //{
+    //    ChampionshipStakes,
+    //    SummerSprint,
+    //    ClassicDerby,
+    //    AutumnChallenge,
+    //    SpeedCup,
+    //    WinterWonderlandRace,
+    //    MajesticMile,
+    //    StarlightStakes,
+    //    RisingStarDerby,
+    //    EmeraldSprint,
+    //    GreatRace,
+    //    SunshineStakes,
+    //    FastTrackChallenge,
+    //    GoldenTrophy,
+    //    VictoryLap,
+    //    MountainViewStakes,
+    //    ThunderRace,
+    //    HorizonCup,
+    //    WindyCityDerby,
+    //    LegendsRace
+    //}
+
     public class Race
     {
+        public static Dictionary<int, string> RaceNames { get; private set; } = new Dictionary<int, string>
+    {
+        {1, "Championship Stakes"},
+        {2, "Summer Sprint"},
+        {3, "Classic Derby"},
+        {4, "Autumn Challenge"},
+        {5, "Speed Cup"},
+        {6, "Winter Wonderland Race"},
+        {7, "Majestic Mile"},
+        {8, "Starlight Stakes"},
+        {9, "Rising Star Derby"},
+        {10, "Emerald Sprint"},
+        {11, "Great Race"},
+        {12, "Sunshine Stakes"},
+        {13, "Fast Track Challenge"},
+        {14, "Golden Trophy"},
+        {15, "Victory Lap"},
+        {16, "Mountain View Stakes"},
+        {17, "Thunder Race"},
+        {18, "Horizon Cup"},
+        {19, "Windy City Derby"},
+        {20, "Legends Race"}
+    };
+
+
+
         // Static field for ID
         private static int _nextRaceID = 1;
 
         // Auto Properties
         public int RaceID { get; set; }
+        //public RaceName RaceName { get; set; }
         public string RaceName { get; set; }
         public TimeOnly StartTime { get; set; }
         public List<Horse> Horses { get; set; }
@@ -24,7 +75,7 @@ namespace HorseRacingConsole
         public Race()
         {
             RaceID = _nextRaceID++; // = 1; - no need for this as using count of Races list to start ID
-            RaceName = "Gold Cup";
+            RaceName = RaceNames[1];
             StartTime = new TimeOnly(2, 14, 30);
             Horses = new List<Horse>();
         }

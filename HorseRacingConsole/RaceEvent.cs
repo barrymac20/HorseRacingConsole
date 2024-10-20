@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HorseRacingConsole
 {
-    public enum RaceCourse
+    public enum Racecourse
     {
-        Cork, Downpatrick, Dundalk, Galway, Fairyhouse, Gowran, Kilbeggan, Killarney, Laytown, Leopardstown, Listowel, Naas, Navan, Punchestown, Roscommon, Sligo, Tramore, Ballinrobe, Limerick, Bellewstown, Thurles, Clonmel, Downroyal, Tipperary, Curragh, Wexford
+        Cork=1, Downpatrick, Dundalk, Galway, Fairyhouse, Gowran, Kilbeggan, Killarney, Laytown, Leopardstown, Listowel, Naas, Navan, Punchestown, Roscommon, Sligo, Tramore, Ballinrobe, Limerick, Bellewstown, Thurles, Clonmel, Downroyal, Tipperary, Curragh, Wexford
     }
 
     public class RaceEvent : IEvent
@@ -19,7 +19,7 @@ namespace HorseRacingConsole
 
         // Auto Properties
         public int EventID { get; set; }
-        public RaceCourse RaceCourse { get; set; }
+        public Racecourse RaceCourse { get; set; }
         public int NumberOfRaces { get; set; }
         public DateOnly Date { get; set; }
         public List<Race> Races { get; set; }
@@ -28,13 +28,13 @@ namespace HorseRacingConsole
         public RaceEvent()
         {
             EventID = _nextEventID++;
-            RaceCourse = RaceCourse.Curragh;
+            RaceCourse = Racecourse.Curragh;
             NumberOfRaces = 0;
             Date = DateOnly.FromDateTime(DateTime.Now); //Use this for testing
             Races = new List<Race>();
         }
 
-        public RaceEvent(RaceCourse raceCourse, DateOnly date)
+        public RaceEvent(Racecourse raceCourse, DateOnly date)
         {
             EventID = _nextEventID++;
             RaceCourse = raceCourse;
