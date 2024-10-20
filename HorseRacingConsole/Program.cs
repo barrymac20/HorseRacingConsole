@@ -24,8 +24,8 @@ namespace HorseRacingConsole
             raceEvents.Add(raceEvent1);
             raceEvents.Add(raceEvent2);
 
-            Race race1 = new Race(Race.RaceNames[1], new TimeOnly(2, 00));
-            Race race2 = new Race(Race.RaceNames[2], new TimeOnly(2, 30));
+            Race race1 = new Race(RaceNames.Names[1], new TimeOnly(2, 00));
+            Race race2 = new Race(RaceNames.Names[2], new TimeOnly(2, 30));
             raceEvent1.Races.Add(race1);
             raceEvent2.Races.Add(race2);
 
@@ -303,7 +303,7 @@ namespace HorseRacingConsole
             //    Console.WriteLine($"{Race.RaceNames[i]}\t{(RaceName)i}");
             //}
 
-            foreach (var raceName in Race.RaceNames)
+            foreach (var raceName in RaceNames.Names)
             {
                 Console.WriteLine($"{raceName.Key}\t{raceName.Value}");
             }
@@ -311,8 +311,8 @@ namespace HorseRacingConsole
             Console.Write("\nEnter the corresponding number: ");
             int userInput = int.Parse(Console.ReadLine());
             //Console.WriteLine(Race.RaceNames[userInput]);
-            string race = Race.RaceNames[userInput];
-            Race.RaceNames.Remove(userInput);
+            string race = RaceNames.Names[userInput];
+            RaceNames.Names.Remove(userInput);
             return race;
         }
 
