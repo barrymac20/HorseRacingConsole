@@ -8,25 +8,19 @@ namespace HorseRacingConsole
     {
         private static void Main(string[] args)
         {
-            //CreateNewRace();
-            //GetRaceNameFromUser();
             RunHorseRacingApp();
         }
 
-
-
-        // Run app method
         public static void RunHorseRacingApp()
         {
 
             //RacecourseManager racecourseManager = new RacecourseManager();
 
             List<RaceEvent> raceEvents = new List<RaceEvent>();
+            
             // For testing
             RaceEvent raceEvent1 = new RaceEvent(Racecourse.Cork, new DateOnly(2024, 10, 14));
             RaceEvent raceEvent2 = new RaceEvent(Racecourse.Dundalk, new DateOnly(2024, 11, 1));
-            //racecourseManager.RaceEvents.Add(raceEvent1);
-            //racecourseManager.RaceEvents.Add(raceEvent2);
             raceEvents.Add(raceEvent1);
             raceEvents.Add(raceEvent2);
 
@@ -35,14 +29,10 @@ namespace HorseRacingConsole
             raceEvent1.Races.Add(race1);
             raceEvent2.Races.Add(race2);
 
-            Horse horse1 = new Horse();
-            Horse horse2 = new Horse();
-            race1.Horses.Add(horse1);
-            race2.Horses.Add(horse2);
-
-            //Console.WriteLine(raceEvents.IndexOf(raceEvent1.EventID));
-
-
+            //Horse horse1 = new Horse();
+            //Horse horse2 = new Horse();
+            //race1.Horses.Add(horse1);
+            //race2.Horses.Add(horse2);
 
             MainMenu(raceEvents);
         }
@@ -339,8 +329,8 @@ namespace HorseRacingConsole
 
         public static Horse CreateNewHorse()
         {
-            Horse horse = new Horse("Horse10", new DateOnly(2020, 5, 15));
-            return horse;
+            Horse horse = Horse.GetRandomHorse();
+            return new Horse(horse.HorseName, horse.DateOfBirth);
         }
 
         // Display methods
