@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HorseRacingConsole
+﻿namespace HorseRacingConsole
 {
     public class Weather
     {
-        public float latitude { get; set; }
-        public float longitude { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
         public float generationtime_ms { get; set; }
         public int utc_offset_seconds { get; set; }
         public string timezone { get; set; }
@@ -17,13 +11,8 @@ namespace HorseRacingConsole
         public float elevation { get; set; }
         public Current_Units current_units { get; set; }
         public Current current { get; set; }
-
-        public override string ToString()
-        {
-            return $"Latitude{latitude}";
-        }
     }
-    
+
     public class Current_Units
     {
         public string time { get; set; }
@@ -45,9 +34,12 @@ namespace HorseRacingConsole
 
         public override string ToString()
         {
-            return $"Time: {time}, Temperature: {temperature_2m}, Precipitation: {precipitation}, Weather Code: {weather_code}, Wind Speed: {wind_speed_10m}";
+            DateTime parsedDateTime = DateTime.Parse(time);
+            string formattedDate = parsedDateTime.ToString("dddd, MMMM dd, yyyy");
+            string formattedTime = parsedDateTime.ToString("H:mm:ss tt");
+            string overview = WeatherService.GetWeatherDescription(weather_code);
+
+            return $"Date: {formattedDate} \nTime: {formattedTime}\nOverview: {overview}\nTemperature: {temperature_2m}°C\nPrecipitation: {precipitation}mm\nWind Speed: {wind_speed_10m}Km/h";
         }
-
     }
-
 }

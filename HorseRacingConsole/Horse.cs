@@ -1,21 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HorseRacingConsole
 {
     public class Horse
     {
-
-
-
         // Static field
         private static int _nextHorseID = 1;
         private static List<Horse> horseNames;
@@ -24,7 +12,7 @@ namespace HorseRacingConsole
         // Auto properties
         public string HorseName { get; set; }
         public DateOnly DateOfBirth { get; set; }
-        public int HorseID { get; private set; }// = 1;
+        public int HorseID { get; private set; }
 
         // Constructors
         static Horse()
@@ -37,7 +25,7 @@ namespace HorseRacingConsole
         {            
             HorseID = _nextHorseID++;
             HorseName = "";
-            DateOfBirth = DateOnly.FromDateTime(DateTime.Now); //Use this for testing
+            DateOfBirth = DateOnly.FromDateTime(DateTime.Now);
         }
 
         public Horse(string horseName, DateOnly dateOfBirth)
@@ -53,8 +41,6 @@ namespace HorseRacingConsole
             string json = File.ReadAllText(filePath);
             horseNames = JsonConvert.DeserializeObject<List<Horse>>(json);
         }
-
-
         public static Horse GetRandomHorse()
         {
             if (horseNames == null || horseNames.Count == 0)

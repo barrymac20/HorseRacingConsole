@@ -1,37 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RestSharp;
 
 namespace HorseRacingConsole
 {
     public class WeatherService
     {
-
-        public static readonly string Weather_URL = $"https://api.open-meteo.com/v1/forecast?latitude={Latitude}&longitude={Longitude}&current=temperature_2m,precipitation,weather_code,wind_speed_10m&models=ukmo_seamless";
+        // Properties
         public static double Latitude { get; private set; }
         public static double Longitude { get; private set; }
 
-        public static Weather? GetCurrentWeather()
+        // Constructors
+        public WeatherService(double latitude, double longitude)
         {
-            var client = new RestClient(Weather_URL);
+            Latitude = latitude;
+            Longitude = longitude;
+        }
+
+        // Methods
+        public Weather? GetCurrentWeather()
+        {
+            string weatherURL = $"https://api.open-meteo.com/v1/forecast?latitude={Latitude}&longitude={Longitude}&current=temperature_2m,precipitation,weather_code,wind_speed_10m&models=ukmo_seamless";
+            var client = new RestClient(weatherURL);
             var request = new RestRequest();
             var response = client.Execute(request);
+
             if (!string.IsNullOrWhiteSpace(response.Content))
             {
                 string receivedJSON = response.Content;
                 Weather? weather = JsonConvert.DeserializeObject<Weather>(receivedJSON);
-
                 return weather;
             }
             return null;
         }
 
         // Got this information from open-meteo.com
-        private static (double Latitude, double Longitude)? GetCoordinates(Racecourse racecourse)
+        // Using Tuple
+        public static (double Latitude, double Longitude)? GetCoordinates(Racecourse racecourse)
         {
             return racecourse switch
             {
@@ -65,5 +69,37 @@ namespace HorseRacingConsole
             };
         }
 
+        // From open-meteo
+        public static string GetWeatherDescription(int weatherCode)
+        {
+            return weatherCode switch
+            {
+                0 => "Clear sky",
+                1 => "Mainly clear",
+                2 => "Partly cloudy",
+                3 => "Overcast",
+                45 => "Fog",
+                48 => "Depositing rime fog",
+                51 => "Light drizzle",
+                53 => "Moderate drizzle",
+                55 => "Dense drizzle",
+                61 => "Slight rain",
+                63 => "Moderate rain",
+                65 => "Heavy rain",
+                71 => "Slight snow",
+                73 => "Moderate snow",
+                75 => "Heavy snow",
+                77 => "Snow grains",
+                80 => "Slight rain showers",
+                81 => "Moderate rain showers",
+                82 => "Violent rain showers",
+                85 => "Slight snow showers",
+                86 => "Heavy snow showers",
+                95 => "Thunderstorm",
+                96 => "Thunderstorm with slight hail",
+                99 => "Thunderstorm with heavy hail",
+                _ => "Unknown"
+            };
+        }
     }
 }
