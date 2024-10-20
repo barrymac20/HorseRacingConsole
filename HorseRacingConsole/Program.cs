@@ -17,7 +17,7 @@ namespace HorseRacingConsole
             //RacecourseManager racecourseManager = new RacecourseManager();
 
             List<RaceEvent> raceEvents = new List<RaceEvent>();
-            
+
             // For testing
             RaceEvent raceEvent1 = new RaceEvent(Racecourse.Cork, new DateOnly(2024, 10, 14));
             RaceEvent raceEvent2 = new RaceEvent(Racecourse.Dundalk, new DateOnly(2024, 11, 1));
@@ -42,6 +42,7 @@ namespace HorseRacingConsole
         {
             while (true)
             {
+                Console.Clear();
                 Menu.ShowMainMenu();
                 int userType = GetUserMenuInput(4);
 
@@ -60,6 +61,7 @@ namespace HorseRacingConsole
         {
             while (true)
             {
+                Console.Clear();
                 Menu.ShowRacecourseManagerMenu();
                 int managerOption = GetUserMenuInput(6);
 
@@ -109,7 +111,7 @@ namespace HorseRacingConsole
                             if (raceEvent.EventID == userSelection5)
                             {
                                 Console.WriteLine(raceEvent);
-                                Console.Write("Type Race ID to add a horse: ");
+                                Console.Write("Enter the relevant Race ID: ");
                                 int userSelection55 = GetUserSelection();
                                 foreach (var race in raceEvent.Races)
                                 {
@@ -127,6 +129,8 @@ namespace HorseRacingConsole
                         return;
                     default: break;
                 }
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
             }
         }
 
@@ -135,13 +139,13 @@ namespace HorseRacingConsole
             while (true)
             {
                 Menu.ShowHorseOwnerMenu();
-                int horseOwnerOption = GetUserMenuInput(5);
+                int horseOwnerOption = GetUserMenuInput(2);
 
                 switch (horseOwnerOption)
                 {
                     case 1:
                         ShowRaceEvents(raceEvents);
-                        Console.Write("Type Event ID to see its races: ");
+                        Console.Write("Enter the relevant Event ID: ");
 
                         int userSelection5 = GetUserSelection();
                         foreach (var raceEvent in raceEvents)
@@ -149,7 +153,7 @@ namespace HorseRacingConsole
                             if (raceEvent.EventID == userSelection5)
                             {
                                 Console.WriteLine(raceEvent);
-                                Console.Write("Type Race ID to add a horse: ");
+                                Console.Write("Enter the relevant Race ID: ");
                                 int userSelection55 = GetUserSelection();
                                 foreach (var race in raceEvent.Races)
                                 {
@@ -299,15 +303,17 @@ namespace HorseRacingConsole
             //    Console.WriteLine($"{Race.RaceNames[i]}\t{(RaceName)i}");
             //}
 
-            foreach (var raceName in Race.RaceNames) 
+            foreach (var raceName in Race.RaceNames)
             {
                 Console.WriteLine($"{raceName.Key}\t{raceName.Value}");
             }
 
             Console.Write("\nEnter the corresponding number: ");
             int userInput = int.Parse(Console.ReadLine());
-            //Console.WriteLine(Race.RaceNames[userInput]);    
-            return Race.RaceNames[userInput];
+            //Console.WriteLine(Race.RaceNames[userInput]);
+            string race = Race.RaceNames[userInput];
+            Race.RaceNames.Remove(userInput);
+            return race;
         }
 
         private static TimeOnly GetTimeFromUser()

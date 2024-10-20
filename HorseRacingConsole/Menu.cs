@@ -22,7 +22,7 @@ namespace HorseRacingConsole
         public static void ShowRacecourseManagerMenu()
         {
             //Console.Clear();
-            Console.WriteLine("\nRacecourse Manager Menu: ");
+            Console.WriteLine("Racecourse Manager Menu: ");
             Console.WriteLine("\n1 - Show all race events");
             Console.WriteLine("2 - Add new race event");
             Console.WriteLine("3 - Show all races");
@@ -36,17 +36,15 @@ namespace HorseRacingConsole
             //Console.Clear();
             Console.WriteLine("\nHorse Owner Menu: ");
             Console.WriteLine("\n1 - Enter horse in race");
-            Console.WriteLine("2 - Show race events");
-            Console.WriteLine("3 - Go back");
+            Console.WriteLine("2 - Go back");
         }
 
         public static void ShowRacegoerMenu()
         {
             //Console.Clear();
             Console.WriteLine("Racegoer Menu: ");
-            Console.WriteLine("\n1 - ");
-            Console.WriteLine("2 - ");
-            Console.WriteLine("3 - Go back");
+            Console.WriteLine("\n1 - See race event, race, and horse information");
+            Console.WriteLine("2 - Go back");
         }
 
         public static void ShowAddRaceMenu()
