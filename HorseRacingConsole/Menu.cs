@@ -27,14 +27,15 @@ namespace HorseRacingConsole
             Console.WriteLine("2 - Add new race event");
             Console.WriteLine("3 - Show all races");
             Console.WriteLine("4 - Add race to a race event");
-            Console.WriteLine("5 - Add horses to a race");
-            Console.WriteLine("6 - Go back");
+            Console.WriteLine("5 - Show all horses");
+            Console.WriteLine("6 - Add horses to a race");
+            Console.WriteLine("7 - Go back");
         }
 
         public static void ShowHorseOwnerMenu()
         {
             //Console.Clear();
-            Console.WriteLine("\nHorse Owner Menu: ");
+            Console.WriteLine("Horse Owner Menu: ");
             Console.WriteLine("\n1 - Enter horse in race");
             Console.WriteLine("2 - Go back");
         }
@@ -50,7 +51,7 @@ namespace HorseRacingConsole
         public static void ShowAddRaceMenu()
         {
             //Console.Clear();
-            Console.WriteLine("\nAdd Race Menu: ");
+            Console.WriteLine("Add Race Menu: ");
             Console.Write("Which race event do you want to add a race to (enter event number): ");
         }
     }

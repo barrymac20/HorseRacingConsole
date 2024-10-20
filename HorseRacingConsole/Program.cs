@@ -29,10 +29,10 @@ namespace HorseRacingConsole
             raceEvent1.Races.Add(race1);
             raceEvent2.Races.Add(race2);
 
-            //Horse horse1 = new Horse();
-            //Horse horse2 = new Horse();
-            //race1.Horses.Add(horse1);
-            //race2.Horses.Add(horse2);
+            Horse horse1 = CreateNewHorse();
+            Horse horse2 = CreateNewHorse();
+            race1.Horses.Add(horse1);
+            race2.Horses.Add(horse2);
 
             MainMenu(raceEvents);
         }
@@ -50,7 +50,7 @@ namespace HorseRacingConsole
                 {
                     case 1: HandleRacecourseManager(raceEvents); break;
                     case 2: HandleHorseOwner(raceEvents); break;
-                    case 3: HandleRacegoer(); break;
+                    case 3: HandleRacegoer(raceEvents); break;
                     case 4: return;
                     default: break;
                 }
@@ -63,7 +63,7 @@ namespace HorseRacingConsole
             {
                 Console.Clear();
                 Menu.ShowRacecourseManagerMenu();
-                int managerOption = GetUserMenuInput(6);
+                int managerOption = GetUserMenuInput(7);
 
                 switch (managerOption)
                 {
@@ -138,6 +138,7 @@ namespace HorseRacingConsole
         {
             while (true)
             {
+                Console.Clear();
                 Menu.ShowHorseOwnerMenu();
                 int horseOwnerOption = GetUserMenuInput(2);
 
@@ -173,28 +174,57 @@ namespace HorseRacingConsole
                         return;
                     default: break;
                 }
-                //break;
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
             }
         }
 
-        private static void HandleRacegoer()
+        private static void HandleRacegoer(List<RaceEvent> raceEvents)
         {
             while (true)
             {
+                Console.Clear();
                 Menu.ShowRacegoerMenu();
-                int raceGoerOption = GetUserMenuInput(3);
+                int raceGoerOption = GetUserMenuInput(2);
 
                 switch (raceGoerOption)
                 {
-                    case 1: Console.WriteLine("1"); break;
-                    case 2: Console.WriteLine("2"); break;
-                    case 3:
-                        Console.WriteLine("3");
-                        //Console.Clear();
+                    case 1: // Show all
+                        ShowRaceEvents(raceEvents);
+                        Console.Write("Enter the relevant Event ID to see race info: ");
+
+                        int userSelection11 = GetUserSelection();
+                        foreach (var raceEvent in raceEvents)
+                        {
+                            if (raceEvent.EventID == userSelection11)
+                            {
+                                Console.WriteLine(raceEvent);
+                                Console.Write("Enter the relevant Race ID to see horse info: ");
+                                int userSelection111 = GetUserSelection();
+                                foreach (var race in raceEvent.Races)
+                                {
+                                    if (race.RaceID == userSelection111)
+                                    {
+                                        Console.WriteLine(race);
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+
+                        
+
+
+
+
+                        break;
+                    case 2: // Go back
                         return;
                     default: break;
                 }
-                //break;
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
             }
         }
 
