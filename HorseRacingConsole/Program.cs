@@ -6,9 +6,16 @@ namespace HorseRacingConsole
 {
     internal class Program
     {
+        
+        
         private static void Main(string[] args)
         {
-            RunHorseRacingApp();
+            //RunHorseRacingApp();
+
+            Weather? weatherData = WeatherService.GetCurrentWeather();
+            Current currentWeather = weatherData.current;
+            Console.WriteLine(currentWeather);
+
         }
 
         public static void RunHorseRacingApp()

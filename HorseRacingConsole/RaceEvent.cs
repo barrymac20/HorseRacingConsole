@@ -15,7 +15,6 @@ namespace HorseRacingConsole
     {
         // Fields
         private static int _nextEventID = 1;
-        //private RaceCourse _raceCourse;
 
         // Auto Properties
         public int EventID { get; set; }
@@ -30,7 +29,7 @@ namespace HorseRacingConsole
             EventID = _nextEventID++;
             RaceCourse = Racecourse.Curragh;
             NumberOfRaces = 0;
-            Date = DateOnly.FromDateTime(DateTime.Now); //Use this for testing
+            Date = DateOnly.FromDateTime(DateTime.Now);
             Races = new List<Race>();
         }
 
@@ -44,7 +43,6 @@ namespace HorseRacingConsole
         }
 
         // Methods
-
         public static void ShowListOfEvents(List<RaceEvent> raceEvents)
         {
             foreach (RaceEvent raceEvent in raceEvents)
@@ -61,13 +59,6 @@ namespace HorseRacingConsole
         // Override methods
         public override string ToString()
         {
-            //     return $"\nRace Event Information:\n" +
-            //$"---------------------------------------------------\n" +
-            //$"| {"Name",-15} | {"Location",-15} | {"Number of Races",-15} | {"Date",-15} |\n" +
-            //$"---------------------------------------------------\n" +
-            //$"| {Name,-15} | {Location,-15} | {NumberOfRaces,-15} | {Date,-15} |\n" +
-            //$"---------------------------------------------------";
-
             string table = $"\nRaces at the {RaceCourse} race meeting:\n" +
                         "-----------------------------------------------\n" +
                         "| Race ID | Race Name            | Start Time |\n" +
