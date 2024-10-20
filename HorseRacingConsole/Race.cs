@@ -7,31 +7,7 @@ using System.Xml.Linq;
 
 namespace HorseRacingConsole
 {
-    //public enum RaceName
-    //{
-    //    ChampionshipStakes,
-    //    SummerSprint,
-    //    ClassicDerby,
-    //    AutumnChallenge,
-    //    SpeedCup,
-    //    WinterWonderlandRace,
-    //    MajesticMile,
-    //    StarlightStakes,
-    //    RisingStarDerby,
-    //    EmeraldSprint,
-    //    GreatRace,
-    //    SunshineStakes,
-    //    FastTrackChallenge,
-    //    GoldenTrophy,
-    //    VictoryLap,
-    //    MountainViewStakes,
-    //    ThunderRace,
-    //    HorizonCup,
-    //    WindyCityDerby,
-    //    LegendsRace
-    //}
-
-    public class Race
+        public class Race
     {
         public static Dictionary<int, string> RaceNames { get; private set; } = new Dictionary<int, string>
     {
